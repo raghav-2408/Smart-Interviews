@@ -31,7 +31,9 @@ public class Main {
         System.out.println("Value for key 'two' after removal: " + hashMap.get("two")); // Output: null
     }
 }
-'''
+```
+
+# Sum Of Pairs
 
 ```java
 import java.io.*;
