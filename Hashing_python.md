@@ -145,37 +145,77 @@ class HashTable:
 
 # Example usage
 ```python
+class HashTable:
+    def __init__(self):
+        self.size = 10
+        self.table = [None] * self.size
+
+    def _hash(self, x):
+        return x % self.size
+
+    def insert(self, x):
+        index = self._hash(x)
+
+        # Linear probing
+        while self.table[index] is not None:
+            if self.table[index] == x:
+                return  # already exists so exit
+            index = (index + 1) % self.size # linearly search for the next available slot by incrementing the index until an empty slot is found.
+
+        # If no collision, insert the element
+        self.table[index] = x
+        print(f"{x} inserted at {index} index")
+        # Element is inserted
+
+    def search(self, x):
+        index = self._hash(x)
+
+        # Linear probing for search
+        while self.table[index] is not None:
+            if self.table[index] == x:
+                print(f"{x} found at {index} index")
+                return True
+                
+            index = (index + 1) % self.size
+        return False # Element is not found
+
+    def delete(self, x):
+        index = self._hash(x)
+
+        # Linear probing for deletion
+        while self.table[index] is not None:
+            if self.table[index] == x:
+                self.table[index] = None
+                print(f"Deleted {x} from index {index}")
+                return
+            index = (index + 1) % self.size
+
+        print(f"{x} not found in the hash table")
 if __name__ == "__main__":
-    hash_table = HashTable()
-
-    hash_table.insert(5)
-    hash_table.insert(15)
-    hash_table.insert(25)
-
-    hash_table.search(15)
-    hash_table.search(10)
-
-    hash_table.delete(15)
-    hash_table.search(15)
+    obj = HashTable()
+    obj.insert(121)
+    obj.insert(212)
+    obj.insert(563)
+    obj.insert(634)
+    obj.insert(435)
+    obj.insert(176)
+    obj.insert(997)
+    obj.insert(366)
+    obj.insert(997)
 ```
 
+`output`
 
-* * hash_table = HashTable(): Creates an instance of the HashTable class.
-
-* * hash_table.insert(5): Inserts the value 5 into the hash table.
-
-* * hash_table.insert(15): Inserts the value 15 into the hash table.
-
-* * hash_table.insert(25): Inserts the value 25 into the hash table.
-
-* * hash_table.search(15): Searches for the value 15 in the hash table.
-
-* * hash_table.search(10): Searches for the value 10 in the hash table.
-
-* * hash_table.delete(15): Deletes the value 15 from the hash table.
-
-* * hash_table.search(15): Searches for the value 15 after deletion to show it's not present.
-
+```
+121 inserted at 1 index
+212 inserted at 2 index
+563 inserted at 3 index
+634 inserted at 4 index
+435 inserted at 5 index
+176 inserted at 6 index
+997 inserted at 7 index
+366 inserted at 8 index
+```
 # Hashing (Handling the collision using Linear Probing)
 ```python
 class HashTable:
