@@ -191,6 +191,8 @@ class HashTable:
             index = (index + 1) % self.size
 
         print(f"{x} not found in the hash table")
+
+
 if __name__ == "__main__":
     obj = HashTable()
     obj.insert(121)
