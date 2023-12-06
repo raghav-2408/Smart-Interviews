@@ -176,3 +176,55 @@ if __name__ == "__main__":
 
 * * hash_table.search(15): Searches for the value 15 after deletion to show it's not present.
 
+# Hashing (Handling the collision using Linear Probing)
+```python
+class HashTable:
+    def __init__(self):
+        self.size = 10
+        self.table = [None] * self.size
+
+    def _hash(self, x):
+        return x % self.size
+
+    def insert(self, x):
+        index = self._hash(x)
+
+        # Linear probing
+        while self.table[index] is not None:
+            if self.table[index] == x:
+                print(f"{x} already exists in the hash table at index {index}")
+                return
+            index = (index + 1) % self.size
+
+        # If no collision, insert the element
+        self.table[index] = x
+        print(f"Inserted {x} at index {index}")
+
+    def search(self, x):
+        index = self._hash(x)
+
+        # Linear probing for search
+        while self.table[index] is not None:
+            if self.table[index] == x:
+                print(f"{x} found at index {index}")
+                return True
+            index = (index + 1) % self.size
+
+        print(f"{x} not found in the hash table")
+        return False
+
+    def delete(self, x):
+        index = self._hash(x)
+
+        # Linear probing for deletion
+        while self.table[index] is not None:
+            if self.table[index] == x:
+                self.table[index] = None
+                print(f"Deleted {x} from index {index}")
+                return
+            index = (index + 1) % self.size
+
+        print(f"{x} not found in the hash table")
+
+```
+
