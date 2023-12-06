@@ -192,13 +192,12 @@ class HashTable:
         # Linear probing
         while self.table[index] is not None:
             if self.table[index] == x:
-                print(f"{x} already exists in the hash table at index {index}")
-                return
-            index = (index + 1) % self.size
+                return  # already exists so exit
+            index = (index + 1) % self.size # linearly search for the next available slot by incrementing the index until an empty slot is found.
 
         # If no collision, insert the element
         self.table[index] = x
-        print(f"Inserted {x} at index {index}")
+        # Element is inserted
 
     def search(self, x):
         index = self._hash(x)
@@ -206,12 +205,9 @@ class HashTable:
         # Linear probing for search
         while self.table[index] is not None:
             if self.table[index] == x:
-                print(f"{x} found at index {index}")
                 return True
             index = (index + 1) % self.size
-
-        print(f"{x} not found in the hash table")
-        return False
+        return False # Element is not found
 
     def delete(self, x):
         index = self._hash(x)
