@@ -291,3 +291,69 @@ for _ in range(int(input())):
     else:
         print ("NO")
 ```
+# Number Of Divisors
+```
+Given a number, find the number of divisors of that number.
+
+Input :
+5
+8
+16808
+9
+23
+97158
+
+Output :
+4
+16
+3
+2
+8
+```
+```python
+import math
+for _ in range(int(input())):
+    N = int(input())
+    count = 0
+    cal = int(math.sqrt(N))
+    for i in range(1, cal+1):
+        if N%i==0:
+            count+=2
+    if cal*cal == N:
+        count -= 1
+    print(count)
+```
+
+# String Vowels
+```
+Given a string, your task is to check if that string contains all the vowels - a,e,i,o,u.
+
+Input Format :
+Input contains a string S, consisting of lowercase characters.
+
+Output Format :
+Print "Yes" if the string S contains all the vowels, otherwise print "No".
+
+Constraints :
+1 <= len(S) <= 1000
+
+Example :
+
+Input :
+smartinterviews
+
+Output :
+No
+```
+```python
+def check(s):
+    v = set("aeiou")
+    return set(s.lower())>=v
+
+s = input()
+res = check(s)
+if res:
+    print("Yes")
+else:
+    print("No")
+```
