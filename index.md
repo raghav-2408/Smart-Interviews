@@ -233,3 +233,61 @@ for _ in range(int(input())):
     func(arr, K)
     print()
 ```
+
+# Powerful Subsets
+
+```
+Given an array A, check if there is any subset of array A in which if we do bitwise AND of all elements of that subset, the result is a power of two (1,2,4,8,16 and so on).
+
+Input :
+3
+3
+1 2 3
+2
+10 20
+5
+5 20 11 14 15
+
+Output :
+YES
+NO
+YES
+
+Explanation :
+Test Case 1 :
+The subset {2} gives AND result of 2, which is a power of 2 also the subset {3,1} gives AND result of 2, which is a power of 2.
+
+Test Case 3 :
+The subset {5,14,15} gives AND result of 4, which is a power of 2.
+```
+```python
+NUM_BITS = 32
+
+def isPowerOf2(num):
+	return (num and (num & (num - 1)) == 0)
+
+def checkSubsequence(arr, n):
+	if (n == 1):
+		return isPowerOf2(arr[0])
+	total = 0
+	for i in range(0, NUM_BITS):
+		total = total | (1 << i)
+
+	for i in range(0, NUM_BITS): 
+		ans = total
+		for j in range(0, n):
+			if (arr[j] & (1 << i)):
+				ans = ans & arr[j]
+		if (isPowerOf2(ans)):
+			return True
+	return False
+
+for _ in range(int(input())):
+    N = int(input())
+    arr = list(map(int, input().split()))
+    n = len(arr)
+    if (checkSubsequence(arr, n)):
+        print ("YES")
+    else:
+        print ("NO")
+```
